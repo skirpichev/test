@@ -6,7 +6,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-14-large, macos-latest-xlarge]
+#       os: [macos-14-large, macos-latest-xlarge]
+        os: ["ghcr.io/cirruslabs/macos-runner:sonoma"]
     steps:
       - uses: actions/checkout@v4
       - run: clang a.c -std=c11 -lm && ./a.out
