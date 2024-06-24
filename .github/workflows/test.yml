@@ -1,0 +1,12 @@
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    name: Build and run it
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-14-large, macos-latest-xlarge]
+    steps:
+      - uses: actions/checkout@v4
+      - run: clang a.c -std=c11 -lm && ./a.out
