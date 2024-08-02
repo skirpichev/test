@@ -6,8 +6,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-#       os: [macos-14-large, macos-latest-xlarge]
-        os: ["ghcr.io/cirruslabs/macos-runner:sonoma"]
+        os: [ubuntu-latest]
+        python: [3.13, 3.14-dev]
     steps:
       - uses: actions/checkout@v4
-      - run: clang a.c -std=c11 -lm && ./a.out
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python3 --version
