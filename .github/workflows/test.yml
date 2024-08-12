@@ -6,12 +6,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python: [3.13, 3.14-dev]
+        os: [macos-14]
+        python: [3.12]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-          allow-prereleases: true
       - run: python3 --version
+      - run: pip install --pre mpmath
+      - run: python3 a.py

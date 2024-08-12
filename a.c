@@ -2,7 +2,7 @@
 #include <stdio.h>
 #if !defined(CMPLX)
 #define HAS_CMPLX 0
-double complex
+static inline double complex
 CMPLX(double real, double imag)
 {
     double complex z;
