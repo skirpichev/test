@@ -16,7 +16,7 @@ jobs:
       - run: |
           ulimit -a
           echo "==="
-          ulimit -v
+          ulimit -d
           echo "==="
-          ulimit -v $((256*1000))
-          ulimit -v
+          ulimit -d $((256*1000))
+          ulimit -d
