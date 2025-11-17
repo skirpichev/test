@@ -6,20 +6,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2022]
+        os: [macos-15]
         python: [3.14]
     steps:
       - uses: actions/checkout@v4
-      - uses: msys2/setup-msys2@v2.29.0
-        with:
-          msystem: ucrt64
-          path-type: inherit
-        if: ${{ startsWith(matrix.os, 'windows') }}
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - shell: msys2 {0}
-        run: |
+      - run: |
           ulimit -a
           echo "==="
           ulimit -v
