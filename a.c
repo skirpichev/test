@@ -1,3 +1,4 @@
+/* a comment */
 #include <complex.h>
 #include <stdio.h>
 #if !defined(CMPLX)
