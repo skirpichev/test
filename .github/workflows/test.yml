@@ -14,9 +14,10 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: |
-          ulimit -a
+          ulimit -s
           echo "==="
-          ulimit -d
+          ulimit -s 4096
+          ulimit -s
           echo "==="
-          ulimit -d $((256*1000))
-          ulimit -d
+          cc a.c
+          ./a.out
