@@ -6,14 +6,21 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-15]
+        os: [windows-2022]
         python: [3.14]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: |
+      - uses: msys2/setup-msys2@v2.29.0
+        name: Setup msys2
+        with:
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+          msystem: ucrt64
+      - shell: msys2 {0}
+        run: |
           ulimit -s
           echo "==="
           ulimit -s 4096
