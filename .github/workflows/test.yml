@@ -21,10 +21,5 @@ jobs:
           msystem: ucrt64
       - shell: msys2 {0}
         run: |
-          ulimit -s
-          echo "==="
-          ulimit -s 4096
-          ulimit -s
-          echo "==="
-          cc a.c
+          gcc -std=c11 a.c
           ./a.out
