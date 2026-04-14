@@ -6,20 +6,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2022]
-        python: [3.14]
+        os: [ubuntu-24.04]
+        python: [3.15]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - uses: msys2/setup-msys2@v2.29.0
-        name: Setup msys2
+          allow-prereleases: true
+      - run: python3 --version
+      - run: sudo apt install -y gcc g++ gfortran libopenblas-dev liblapack-dev pkg-config
+      - run: pip wheel --pre numpy
+      - run: mkdir dist && mv *.whl dist/
+      - uses: actions/upload-artifact@v7
         with:
-          install: >-
-            mingw-w64-ucrt-x86_64-gcc
-          msystem: ucrt64
-      - shell: msys2 {0}
-        run: |
-          gcc -std=c11 a.c
-          ./a.out
+          name: build
+          path: dist/
